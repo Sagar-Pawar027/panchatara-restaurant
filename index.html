@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panchtara — Premium Indian Dining Experience</title>
+    <meta
+      name="description"
+      content="Experience Panjtara Pure Veg on Indore Bypass, celebrating 100% pure vegetarian Indian heritage cuisine, open-air garden lawns, and poolside dining."
+    />
+    <meta property="og:title" content="Panchtara — Premium Indian Dining Experience" />
+    <meta
+      property="og:description"
+      content="Experience Panjtara Pure Veg on Indore Bypass, celebrating 100% pure vegetarian Indian heritage cuisine, open-air garden lawns, and poolside dining."
+    />
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:site_name" content="Panjtara Pure Veg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Panchtara — Premium Indian Dining Experience" />
+    <meta
+      name="twitter:description"
+      content="Experience Panjtara Pure Veg on Indore Bypass, celebrating 100% pure vegetarian Indian heritage cuisine, open-air garden lawns, and poolside dining."
+    />
+    <meta name="theme-color" content="#12110F" />
+
+    <!-- Performance Preload for Largest Contentful Paint (Hero) -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2400&q=85"
+      fetchpriority="high"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Restaurant Structured Data (JSON-LD) for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Panjtara Pure Veg",
+      "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
+      "description": "Indore’s premier 100% pure vegetarian restaurant on Bypass Road, featuring lush garden seating, poolside dining, North Indian delicacies, and Jain-friendly specialties.",
+      "servesCuisine": ["100% Pure Vegetarian", "North Indian", "Tandoori Delicacies", "Jain Friendly", "Malwi Flavors"],
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bypass Road, Near Ralamandal",
+        "addressLocality": "Indore",
+        "addressRegion": "Madhya Pradesh",
+        "postalCode": "452016",
+        "addressCountry": "IN"
+      },
+      "telephone": "+91 98260 12345",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "11:30",
+          "closes": "23:30"
+        }
+      ],
+      "acceptsReservations": "True"
+    }
+    </script>
+  </head>
+  <body class="bg-[#FAF7F2] text-[#1D1B18] antialiased selection:bg-[#C5A880]/30 selection:text-[#181614] overflow-x-hidden font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
