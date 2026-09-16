@@ -58,10 +58,11 @@ export function HeroSection({ onExploreMenu, onReserveTable }: HeroSectionProps)
         initial={shouldReduceMotion ? {} : { opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.15 }}
-        className="relative z-10 inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-black/50 backdrop-blur-md text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-[#C5A880]"
+        className="relative z-10 inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full border border-emerald-500/30 bg-black/50 backdrop-blur-md text-[10px] sm:text-[11px] uppercase tracking-[0.22em] sm:tracking-[0.28em] text-[#C5A880] text-center max-w-[92vw]"
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span>Indore Bypass • 100% Pure Veg Garden & Poolside Dining</span>
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+        <span className="hidden sm:inline">Indore Bypass • 100% Pure Veg Garden & Poolside Dining</span>
+        <span className="sm:hidden">100% Pure Veg • Indore Bypass</span>
       </motion.div>
 
       {/* Center Choreographed Typography & Content */}

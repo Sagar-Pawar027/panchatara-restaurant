@@ -59,14 +59,14 @@ export function LocationSection() {
         </div>
 
         {/* Location Details & Architectural Map Composition */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           {/* Details Card */}
           <motion.div
             initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 bg-[#F4EFE6] border border-[#EAE1D3] rounded-sm p-8 sm:p-10 flex flex-col justify-between space-y-8"
+            className="md:col-span-5 lg:col-span-5 bg-[#F4EFE6] border border-[#EAE1D3] rounded-sm p-6 sm:p-8 lg:p-10 flex flex-col justify-between space-y-8"
           >
             <div className="space-y-6">
               {/* Address */}
@@ -170,7 +170,7 @@ export function LocationSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 relative min-h-[440px] rounded-sm overflow-hidden bg-[#181614] text-[#FAF7F2] shadow-xl flex flex-col justify-between p-8"
+            className="md:col-span-7 lg:col-span-7 relative min-h-[440px] rounded-sm overflow-hidden bg-[#181614] text-[#FAF7F2] shadow-xl flex flex-col justify-between p-6 sm:p-8"
           >
             <div className="absolute inset-0 z-0">
               <img
@@ -183,7 +183,7 @@ export function LocationSection() {
             </div>
 
             {/* Stylized pin marker */}
-            <div className="relative z-10 my-auto flex flex-col items-center justify-center text-center p-6 space-y-4">
+            <div className="relative z-10 my-auto flex flex-col items-center justify-center text-center p-4 sm:p-6 space-y-4">
               <div className="w-14 h-14 rounded-full bg-[#C5A880] text-[#12110F] flex items-center justify-center shadow-2xl relative z-10">
                 <MapPin className="w-7 h-7 fill-current" />
               </div>
@@ -192,13 +192,13 @@ export function LocationSection() {
                 <span className="text-[10px] uppercase tracking-[0.3em] text-[#C5A880] block font-medium">
                   Garden & Poolside Restaurant
                 </span>
-                <h3 className="font-editorial-display text-3xl text-[#FAF7F2] tracking-wider uppercase">
+                <h3 className="font-editorial-display text-2xl sm:text-3xl text-[#FAF7F2] tracking-wider uppercase">
                   Panjtara Pure Veg
                 </h3>
                 <p className="text-xs text-[#FAF7F2]/80 font-light max-w-md mx-auto">
                   Main Bypass Road, In Front of Bharat Benz, Bicholi Mardana / Kanadia, Indore, MP 452016
                 </p>
-                <div className="pt-2 flex items-center justify-center gap-2">
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-2">
                   <span className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-mono">
                     ★ 4.1 on Google (3,500+ Reviews)
                   </span>

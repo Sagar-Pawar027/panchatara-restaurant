@@ -148,7 +148,7 @@ export function ReservationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-[#161513] border border-white/10 rounded-sm p-8 sm:p-14 shadow-2xl relative"
+          className="bg-[#161513] border border-white/10 rounded-sm p-6 sm:p-10 lg:p-14 shadow-2xl relative"
         >
           <AnimatePresence mode="wait">
             {status === 'success' ? (

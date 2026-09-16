@@ -61,14 +61,14 @@ export function DishDetailModal({ dish, onClose, onReserveClick }: DishDetailMod
             id="dish-modal-close-btn"
             onClick={onClose}
             aria-label="Close dish preview"
-            className="absolute top-4 right-4 z-20 text-[#FAF7F2]/80 hover:text-white bg-black/50 hover:bg-black/80 p-2 rounded-full transition-colors border border-white/10"
+            className="absolute top-4 right-4 z-20 text-[#FAF7F2]/80 hover:text-white bg-black/60 hover:bg-black/90 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors border border-white/10"
           >
             <X className="w-5 h-5" />
           </button>
 
           {/* Dish hero image */}
           {dish.image && (
-            <div className="relative h-64 sm:h-72 w-full overflow-hidden shrink-0 bg-[#12110F]">
+            <div className="relative h-48 sm:h-64 md:h-72 w-full overflow-hidden shrink-0 bg-[#12110F]">
               <img
                 src={dish.image}
                 alt={dish.name}

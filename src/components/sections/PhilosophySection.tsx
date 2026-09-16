@@ -75,10 +75,10 @@ export function PhilosophySection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.8, delay: index * 0.12 + 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="py-12 lg:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start group transition-colors duration-500 rounded-sm hover:bg-[#EFE9DF]/40 px-2 sm:px-4 -mx-2 sm:-mx-4"
+                className="py-10 md:py-14 lg:py-16 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start group transition-colors duration-500 rounded-sm hover:bg-[#EFE9DF]/40 px-3 sm:px-4 -mx-3 sm:-mx-4"
               >
                 {/* Number and Sanskrit cultural element */}
-                <div className="lg:col-span-3 flex items-baseline justify-between lg:block space-y-2">
+                <div className="md:col-span-3 lg:col-span-3 flex items-baseline justify-between md:block space-y-2">
                   <span className="font-editorial-serif text-4xl sm:text-5xl text-[#A58458] group-hover:text-[#181614] transition-colors duration-500 block">
                     {principle.number}
                   </span>
@@ -88,7 +88,7 @@ export function PhilosophySection() {
                 </div>
 
                 {/* Title & Tagline */}
-                <div className="lg:col-span-4 space-y-2">
+                <div className="md:col-span-4 lg:col-span-4 space-y-2">
                   <h3 className="font-editorial-display text-2xl sm:text-3xl uppercase tracking-[0.12em] text-[#181614] font-medium group-hover:text-[#A58458] transition-colors duration-300">
                     {principle.title}
                   </h3>
@@ -98,7 +98,7 @@ export function PhilosophySection() {
                 </div>
 
                 {/* Description & Accompanying Thought */}
-                <div className="lg:col-span-5 space-y-4">
+                <div className="md:col-span-5 lg:col-span-5 space-y-4">
                   <p className="text-sm sm:text-base text-[#3E3A34] font-light leading-relaxed">
                     {principle.description}
                   </p>

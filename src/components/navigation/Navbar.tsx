@@ -137,7 +137,7 @@ export function Navbar({ activeSection, onNavigate }: NavbarProps) {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileMenuOpen}
-              className="lg:hidden p-2 text-[#FAF7F2] hover:text-[#C5A880] transition-colors focus:outline-none"
+              className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-[#FAF7F2] hover:text-[#C5A880] transition-colors focus:outline-none"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -154,14 +154,14 @@ export function Navbar({ activeSection, onNavigate }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-30 lg:hidden bg-[#12110F] text-[#FAF7F2] flex flex-col justify-between pt-24 pb-8 px-8 overflow-y-auto"
+            className="fixed inset-0 z-30 lg:hidden bg-[#12110F] text-[#FAF7F2] flex flex-col justify-between pt-24 pb-8 px-6 sm:px-8 overflow-y-auto"
           >
             <div className="space-y-6">
               <div className="text-xs uppercase tracking-[0.28em] text-[#C5A880]/70 pb-3 border-b border-white/10">
                 Navigation
               </div>
 
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-2">
                 {NAV_LINKS.map((link, idx) => (
                   <motion.button
                     key={link.id}
@@ -170,7 +170,7 @@ export function Navbar({ activeSection, onNavigate }: NavbarProps) {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.04 * idx, duration: 0.3 }}
                     onClick={() => handleLinkClick(link.id)}
-                    className="text-left font-editorial-serif text-2xl tracking-wide text-[#FAF7F2] hover:text-[#C5A880] transition-colors flex items-center justify-between py-1 group"
+                    className="text-left font-editorial-serif text-2xl tracking-wide text-[#FAF7F2] hover:text-[#C5A880] transition-colors flex items-center justify-between py-2.5 px-1 min-h-[44px] group"
                   >
                     <span>{link.label}</span>
                     <span className="text-xs text-[#C5A880] font-sans tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">

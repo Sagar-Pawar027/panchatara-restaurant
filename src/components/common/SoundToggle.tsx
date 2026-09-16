@@ -90,7 +90,7 @@ export function SoundToggle() {
       id="sound-ambient-toggle-btn"
       onClick={toggleSound}
       aria-label={isPlaying ? 'Mute ambient restaurant soundscape' : 'Play ambient restaurant soundscape'}
-      className="inline-flex items-center gap-2 px-3 py-1.5 text-xs uppercase tracking-widest text-[#FAF7F2]/80 hover:text-[#C5A880] transition-colors rounded-full border border-white/10 hover:border-[#C5A880]/40 bg-black/30 backdrop-blur-sm"
+      className="inline-flex items-center justify-center gap-2 px-3 py-1.5 min-h-[44px] min-w-[44px] text-xs uppercase tracking-widest text-[#FAF7F2]/80 hover:text-[#C5A880] transition-colors rounded-full border border-white/10 hover:border-[#C5A880]/40 bg-black/30 backdrop-blur-sm"
       title={isPlaying ? 'Mute ambient soundscape' : 'Listen to ambient Tanpura soundscape'}
     >
       {isPlaying ? (

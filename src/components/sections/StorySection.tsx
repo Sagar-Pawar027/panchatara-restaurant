@@ -35,8 +35,8 @@ export function StorySection({ onExploreSignatures }: StorySectionProps) {
         </div>
 
         {/* Large Editorial Headline and Asymmetric Composition */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          <div className="lg:col-span-7 space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-20 items-center">
+          <div className="md:col-span-7 space-y-8">
             {/* Masked Headline Reveal */}
             <div className="overflow-hidden">
               <motion.h2
@@ -97,7 +97,7 @@ export function StorySection({ onExploreSignatures }: StorySectionProps) {
           </div>
 
           {/* Architectural Image Mask Reveal */}
-          <div className="lg:col-span-5 relative">
+          <div className="md:col-span-5 lg:col-span-5 relative">
             <motion.div
               initial={
                 shouldReduceMotion

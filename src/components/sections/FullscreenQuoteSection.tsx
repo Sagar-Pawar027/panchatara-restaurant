@@ -70,7 +70,7 @@ export function FullscreenQuoteSection() {
         </motion.div>
 
         {/* Main Monograph Headline with Masked Entrance */}
-        <h2 className="font-editorial-serif text-4xl sm:text-6xl md:text-7xl font-normal leading-tight text-[#FAF7F2]">
+        <h2 className="font-editorial-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-tight text-[#FAF7F2]">
           <span className="block overflow-hidden py-1">
             <motion.span
               initial={shouldReduceMotion ? {} : { y: '100%' }}

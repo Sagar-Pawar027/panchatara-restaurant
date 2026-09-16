@@ -49,7 +49,7 @@ export function ExperienceSection() {
           </div>
 
           {/* Clean Agency Typographic Selector with Animated Spring Underline */}
-          <div className="flex items-center gap-6 sm:gap-8 overflow-x-auto pb-2 scrollbar-none">
+          <div className="flex items-center gap-6 sm:gap-8 overflow-x-auto pb-2 scrollbar-none px-1">
             {EXPERIENCE_PILLARS.map((pillar, idx) => {
               const isSelected = activeTab === pillar.id;
               return (
@@ -57,7 +57,7 @@ export function ExperienceSection() {
                   key={pillar.id}
                   id={`experience-tab-${pillar.id}`}
                   onClick={() => setActiveTab(pillar.id)}
-                  className={`relative text-xs uppercase tracking-[0.22em] font-medium pb-2 transition-colors duration-300 whitespace-nowrap ${
+                  className={`relative text-xs uppercase tracking-[0.22em] font-medium pb-2 transition-colors duration-300 whitespace-nowrap min-h-[44px] inline-flex items-center ${
                     isSelected
                       ? 'text-[#181614]'
                       : 'text-[#706658] hover:text-[#181614]'
@@ -92,10 +92,10 @@ export function ExperienceSection() {
               animate={{ opacity: 1 }}
               exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0 }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]"
+              className="grid grid-cols-1 md:grid-cols-12 min-h-[480px] lg:min-h-[520px]"
             >
               {/* Image Side with Quiet Settle */}
-              <div className="lg:col-span-7 relative h-72 lg:h-full min-h-[380px] overflow-hidden bg-[#0E0D0B]">
+              <div className="md:col-span-6 lg:col-span-7 relative h-72 md:h-full min-h-[300px] sm:min-h-[340px] md:min-h-[380px] overflow-hidden bg-[#0E0D0B]">
                 <motion.img
                   key={currentPillar.image}
                   src={currentPillar.image}
@@ -105,11 +105,11 @@ export function ExperienceSection() {
                   transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                   className="w-full h-full object-cover object-center"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#141311] via-transparent to-transparent lg:hidden" />
-                <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-transparent via-[#141311]/40 to-[#141311]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141311] via-transparent to-transparent md:hidden" />
+                <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-[#141311]/40 to-[#141311]" />
 
-                <div className="absolute bottom-8 left-8 text-[#FAF7F2]">
-                  <span className="text-2xl font-editorial-serif text-[#C5A880] block mb-1">
+                <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 text-[#FAF7F2]">
+                  <span className="text-xl sm:text-2xl font-editorial-serif text-[#C5A880] block mb-1">
                     {currentPillar.hindiTitle}
                   </span>
                   <span className="text-xs uppercase tracking-[0.25em] text-[#FAF7F2]/75">
@@ -119,7 +119,7 @@ export function ExperienceSection() {
               </div>
 
               {/* Text / Atmosphere Side */}
-              <div className="lg:col-span-5 p-8 sm:p-14 flex flex-col justify-between">
+              <div className="md:col-span-6 lg:col-span-5 p-6 sm:p-10 lg:p-14 flex flex-col justify-between">
                 <div className="space-y-6">
                   <div>
                     <span className="text-xs uppercase tracking-[0.25em] text-[#C5A880] block mb-2 font-medium">

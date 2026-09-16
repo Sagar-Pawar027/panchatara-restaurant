@@ -86,7 +86,7 @@ export function SignatureDishesSection({ onSelectDish, onViewFullMenu }: Signatu
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.75, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => onSelectDish(dish)}
-              className="group cursor-pointer flex flex-col bg-[#FDFBF7] border border-[#E8E0D2] hover:border-[#C5A880] focus:border-[#C5A880] focus:outline-none focus:ring-2 focus:ring-[#C5A880]/30 transition-all duration-500 rounded-sm overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]"
+              className="group cursor-pointer flex flex-col bg-[#FDFBF7] border border-[#E8E0D2] hover:border-[#C5A880] focus:border-[#C5A880] focus:outline-none focus:ring-2 focus:ring-[#C5A880]/30 transition-all duration-500 rounded-sm overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] md:last:col-span-2 lg:last:col-span-1 md:last:max-w-md md:last:mx-auto lg:last:max-w-none lg:last:mx-0 w-full"
             >
               {/* Image Container with Measured Zoom */}
               <div className="relative aspect-[16/11] overflow-hidden bg-[#1C1A17]">
@@ -107,7 +107,7 @@ export function SignatureDishesSection({ onSelectDish, onViewFullMenu }: Signatu
               </div>
 
               {/* Text Information */}
-              <div className="p-7 flex flex-col flex-1 justify-between bg-[#FBF8F2] group-hover:bg-[#F6F0E6] transition-colors duration-500">
+              <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-[#FBF8F2] group-hover:bg-[#F6F0E6] transition-colors duration-500">
                 <div>
                   <div className="flex items-baseline justify-between gap-4 mb-1">
                     <h3 className="font-editorial-serif text-xl sm:text-2xl text-[#181614] font-medium group-hover:text-[#A58458] transition-colors duration-300">
