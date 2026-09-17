@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Search, Sparkles, UtensilsCrossed } from 'lucide-react';
 import { MenuCategoryKey, MenuItem } from '../../types/index.ts';
@@ -10,16 +10,30 @@ interface InteractiveMenuSectionProps {
 }
 
 export function InteractiveMenuSection({ onSelectDish, onReserveTable }: InteractiveMenuSectionProps) {
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(MENU_ITEMS);
   const [activeCategory, setActiveCategory] = useState<MenuCategoryKey>('starters');
   const [dietaryFilter, setDietaryFilter] = useState<'all' | 'signatures' | 'jain-available' | 'gluten-free' | 'chef-special'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const shouldReduceMotion = useReducedMotion();
 
+  useEffect(() => {
+    fetch('/api/menu')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          setMenuItems(data.data);
+        }
+      })
+      .catch(() => {
+        // graceful fallback to static data
+      });
+  }, []);
+
   const currentCategoryInfo = MENU_CATEGORIES.find((c) => c.key === activeCategory) || MENU_CATEGORIES[0];
 
   // Filtered items
   const filteredItems = useMemo(() => {
-    return MENU_ITEMS.filter((item) => {
+    return menuItems.filter((item) => {
       const matchesCategory = searchQuery.trim() ? true : item.category === activeCategory;
 
       let matchesDietary = true;
@@ -41,7 +55,7 @@ export function InteractiveMenuSection({ onSelectDish, onReserveTable }: Interac
 
       return matchesCategory && matchesDietary && matchesSearch;
     });
-  }, [activeCategory, dietaryFilter, searchQuery]);
+  }, [menuItems, activeCategory, dietaryFilter, searchQuery]);
 
   return (
     <section
@@ -240,9 +254,16 @@ export function InteractiveMenuSection({ onSelectDish, onReserveTable }: Interac
                         )}
                       </div>
 
-                      <span className="font-editorial-serif text-lg text-[#FAF7F2] group-hover:text-[#C5A880] transition-colors font-semibold shrink-0">
-                        {item.price}
-                      </span>
+                      <div className="flex items-center gap-2 shrink-0">
+                        {(item as any).isAvailable === false && (
+                          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30">
+                            Sold Out Today
+                          </span>
+                        )}
+                        <span className="font-editorial-serif text-lg text-[#FAF7F2] group-hover:text-[#C5A880] transition-colors font-semibold">
+                          {item.price}
+                        </span>
+                      </div>
                     </div>
 
                     {item.hindiName && (

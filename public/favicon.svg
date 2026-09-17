@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5D1B8" />
+      <stop offset="50%" stop-color="#C5A880" />
+      <stop offset="100%" stop-color="#9E8055" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1C18" />
+      <stop offset="100%" stop-color="#0E0D0B" />
+    </linearGradient>
+  </defs>
+  <!-- Background Badge -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" />
+  <rect width="60" height="60" x="2" y="2" rx="14" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-opacity="0.6" />
+  
+  <!-- Panchtara Emblem: 5-pointed star / Royal Cloche and Veg Leaf -->
+  <g transform="translate(32, 31)">
+    <!-- Elegant 5-star geometric motif -->
+    <path d="M0 -18 L4.5 -6 L17.5 -6 L7 2 L11 15 L0 7.5 L-11 15 L-7 2 L-17.5 -6 L-4.5 -6 Z" 
+          fill="url(#goldGrad)" />
+    <!-- Center Pure Veg Emerald Gem -->
+    <circle cx="0" cy="0" r="3.5" fill="#10B981" stroke="#0E0D0B" stroke-width="1" />
+  </g>
+  <!-- Subtle arc beneath representing hospitality tray / cloche -->
+  <path d="M16 48 Q32 54 48 48" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round" />
+</svg>

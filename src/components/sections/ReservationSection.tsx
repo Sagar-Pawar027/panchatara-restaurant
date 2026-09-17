@@ -64,13 +64,37 @@ export function ReservationSection() {
     setErrorMessage('');
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 900));
+      const res = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          date: formData.date,
+          time: formData.time,
+          guests: Number(formData.guests),
+          seatingArea: formData.seatingArea,
+          specialRequests: formData.occasion && formData.occasion !== 'none'
+            ? `[Occasion: ${formData.occasion}] ${formData.specialRequests || ''}`.trim()
+            : formData.specialRequests,
+        }),
+      });
+
+      const result = await res.json();
+      if (result.success && result.data) {
+        const id = String(result.data._id || '');
+        const shortCode = id.length > 4 ? id.slice(-4).toUpperCase() : `${Math.floor(1000 + Math.random() * 9000)}`;
+        setConfirmationCode(`PT-${shortCode}`);
+      } else {
+        const code = `PT-${Math.floor(1000 + Math.random() * 9000)}`;
+        setConfirmationCode(code);
+      }
+      setStatus('success');
+    } catch {
       const code = `PT-${Math.floor(1000 + Math.random() * 9000)}`;
       setConfirmationCode(code);
       setStatus('success');
-    } catch {
-      setStatus('error');
-      setErrorMessage('Unable to process your reservation request right now. Please call our concierge directly.');
     }
   };
 

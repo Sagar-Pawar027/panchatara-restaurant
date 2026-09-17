@@ -1,14 +1,36 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { ArrowUp, Instagram, Facebook, Check, ArrowRight } from 'lucide-react';
 import { RESTAURANT_INFO } from '../../data/restaurant.ts';
 
 interface FooterProps {
-  onNavigate: (sectionId: string) => void;
+  onNavigate?: (path: string) => void;
 }
+
+const FOOTER_LINKS = [
+  { path: '/', label: 'Home' },
+  { path: '/menu', label: 'Menu' },
+  { path: '/story', label: 'Our Story' },
+  { path: '/philosophy', label: 'Philosophy' },
+  { path: '/signatures', label: 'Signatures' },
+  { path: '/experience', label: 'Experience' },
+  { path: '/gallery', label: 'Gallery' },
+  { path: '/reservation', label: 'Reservation' },
+  { path: '/location', label: 'Location' },
+];
 
 export function Footer({ onNavigate }: FooterProps) {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLink = (path: string) => {
+    if (onNavigate) {
+      onNavigate(path);
+    } else {
+      navigate(path);
+    }
+  };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,14 +126,14 @@ export function Footer({ onNavigate }: FooterProps) {
               Navigation
             </span>
             <ul className="space-y-2 text-white/70">
-              {['story', 'philosophy', 'signature', 'menu', 'experience', 'gallery', 'reservation'].map((id) => (
-                <li key={id}>
+              {FOOTER_LINKS.map((link) => (
+                <li key={link.path}>
                   <button
-                    id={`footer-nav-${id}`}
-                    onClick={() => onNavigate(id)}
-                    className="hover:text-[#C5A880] transition-colors capitalize text-left"
+                    id={`footer-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    onClick={() => handleLink(link.path)}
+                    className="hover:text-[#C5A880] transition-colors text-left"
                   >
-                    {id === 'story' ? 'Our Story' : id}
+                    {link.label}
                   </button>
                 </li>
               ))}
@@ -199,6 +221,12 @@ export function Footer({ onNavigate }: FooterProps) {
 
           <div className="flex items-center gap-6">
             <span className="hidden sm:inline">Indore Bypass • Madhya Pradesh</span>
+            <button
+              onClick={() => onNavigate('/admin')}
+              className="text-white/40 hover:text-[#C5A880] transition-colors text-xs"
+            >
+              Staff Portal
+            </button>
             <button
               id="back-to-top-btn"
               onClick={scrollToTop}
