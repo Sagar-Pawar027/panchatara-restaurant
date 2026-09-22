@@ -1,6 +1,6 @@
 {
   "name": "Panchtara — Premium Indian Dining Experience",
-  "description": "Experience Panjtara Pure Veg on Indore Bypass, celebrating 100% pure vegetarian Indian heritage cuisine, open-air garden lawns, and poolside dining.",
+  "description": "Panjtara Pure Veg on Indore Bypass — 100% pure vegetarian dining with online ordering (save aggregator commissions), table pre-reservations with 50% advance, and live order tracking.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

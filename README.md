@@ -1,106 +1,120 @@
-# Panjtara Pure Veg — Full-Stack Web Application
+# Panjtara Pure Veg — 3-Tier Clean Architecture Monorepo
 
-A full-stack restaurant web application with a guest-facing experience, a dedicated staff/admin management portal, and a Node.js + Express + MongoDB backend.
+A modular, production-ready restaurant system divided into **3 independent folders** (`Admin/`, `Website/`, and `Backend/`), each with its own `package.json`, TypeScript configuration, and isolated environment settings.
 
 ---
 
 ## Architecture Overview
 
 ```text
-├── server/                   # Backend API (Node.js, Express, Mongoose)
-│   ├── models/               # Mongoose Schemas (MenuItem, Reservation, PreOrder)
-│   ├── routes/               # Express REST Routers (/api/menu, /api/reservations, /api/pre-orders, /api/admin)
-│   ├── app.ts                # Express app configuration & middleware
-│   └── db.ts                 # Dual-mode database layer (MongoDB Atlas + In-Memory fallback)
+├── Backend/                 # Standalone Express + Node.js + MongoDB API Service
+│   ├── package.json         # Backend dependencies (express, mongoose, cors, dotenv)
+│   ├── tsconfig.json        # NodeNext TypeScript configuration
+│   ├── .env.example         # Backend environment variables (PORT, MONGODB_URI, CORS_ORIGINS)
+│   ├── README.md            # Backend documentation & standalone setup guide
+│   └── src/
+│       ├── config/          # MongoDB Atlas connection & resilient in-memory fallback
+│       ├── data/            # Seed menu items and initial store
+│       ├── middleware/      # Security headers, sliding-window rate limiting & auth verification
+│       ├── models/          # Mongoose models (MenuItem, Reservation, PreOrder)
+│       ├── routes/          # RESTful routes (/api/menu, /api/reservations, /api/pre-orders, /api/admin)
+│       ├── app.ts           # Express application definition
+│       └── server.ts        # Standalone server entry point
 │
-├── src/
-│   ├── admin/                # Dedicated Staff & Admin Portal
-│   │   ├── pages/            # Dashboard, Menu Manager, Reservations, Kitchen Orders, Settings, Login
-│   │   ├── AuthContext.tsx   # Firebase Authentication provider
-│   │   ├── firebase.ts       # Firebase client initialization
-│   │   ├── AdminLayout.tsx   # Admin dashboard shell & navigation
-│   │   └── api.ts            # Typed client SDK communicating with /api/*
-│   │
-│   ├── components/           # Public guest website UI components
-│   │   ├── common/           # Navigation, Pre-Order Modal, Footers, Modals
-│   │   └── sections/         # Hero, Menu Section, Reservation Section, etc.
-│   │
-│   ├── pages/                # Public routes (Home, Menu, Story, Signatures, Reservations, Location, etc.)
-│   ├── data/                 # Menu, philosophy, and restaurant data
-│   ├── types/                # TypeScript shared interfaces
-│   ├── App.tsx               # Master router (Guest website + Admin Portal)
-│   └── main.tsx              # React entry point
+├── Website/                 # Standalone Guest-Facing React 19 + Vite Website
+│   ├── package.json         # Website dependencies (react, react-router-dom, motion, lucide-react)
+│   ├── vite.config.ts       # Vite config with proxy to backend /api
+│   ├── tsconfig.json        # Frontend TypeScript configuration
+│   ├── index.html           # Public HTML shell
+│   ├── .env.example         # Website environment variables (VITE_API_URL)
+│   ├── README.md            # Website documentation & standalone setup guide
+│   └── src/
+│       ├── components/      # Common UI (Navbar, Footer, Modals) & Page Sections
+│       ├── data/            # Restaurant metadata, dishes, philosophy
+│       ├── pages/           # Public pages (Home, Menu, Story, Signatures, Location, etc.)
+│       ├── services/        # Clean API client for backend communication
+│       ├── types/           # Shared interfaces and types
+│       ├── App.tsx          # Public router & customer layout
+│       └── main.tsx         # React root
 │
-├── server.ts                 # Unified server entry point (Express API + Vite SPA middleware)
-├── package.json              # Full-stack dependencies & build scripts
-└── .env.example              # Environment variables template
+├── Admin/                   # Standalone Staff & Admin React 19 + Vite Portal
+│   ├── package.json         # Admin dependencies (firebase, react, react-router-dom, lucide-react)
+│   ├── vite.config.ts       # Vite config with proxy to backend /api
+│   ├── tsconfig.json        # Admin TypeScript configuration
+│   ├── index.html           # Admin HTML shell
+│   ├── .env.example         # Admin environment variables (Firebase config & VITE_API_URL)
+│   ├── README.md            # Admin portal documentation & setup guide
+│   └── src/
+│       ├── config/          # Firebase SDK initialization
+│       ├── context/         # AuthContext with session persistence & role verification
+│       ├── services/        # Typed API SDK calling backend admin routes
+│       ├── components/      # AdminLayout and dashboard navigation shell
+│       ├── pages/           # Dashboard, MenuManager, Reservations, Orders, Settings, Login
+│       ├── App.tsx          # Protected admin router
+│       └── main.tsx         # React root
+│
+├── server.ts                # Unified dev & production gateway on Port 3000
+├── package.json             # Root monorepo orchestration scripts
+└── README.md                # Master documentation
 ```
 
 ---
 
-## Features
+## Security & Clean Architecture Highlights
 
-### 1. Public Customer Website
-- **Dynamic Gastronomic Menu (`/menu`)**: Live synchronization with backend (`GET /api/menu`), filtering by dietary preferences (Jain Satvik, Chef's Special, Gluten-Free) and instant stock availability tags.
-- **Table Reservation Concierge (`/reservation`)**: Live booking connected directly to `POST /api/reservations`.
-- **Kitchen Pre-Ordering (`PreOrderModal`)**: Cart system for dishes, advance deposit estimation, and submission directly to `POST /api/pre-orders`.
-- **Ambiance & Culinary Showcase**: Open-air lawn, poolside cabanas, high-contrast dark aesthetic with gold accents.
-
-### 2. Staff & Admin Management Portal (`/admin`)
-- **Firebase Authentication**: Email/Password login, Google Sign-In, and instant demo access.
-- **Command Dashboard (`/admin`)**: Real-time business metrics, live Atlas database connectivity check, and latest booking logs.
-- **Menu Management (`/admin/menu`)**: Create, update, delete dishes, adjust pricing, and toggle real-time "In Stock / Sold Out" status.
-- **Table Reservations Manager (`/admin/reservations`)**: Filter by date and status (`confirmed`, `pending`, `completed`, `cancelled`), manage walk-in bookings, and delete records.
-- **Kitchen Order Pipeline (`/admin/orders`)**: Kitchen workflow pipeline (`received` → `preparing` → `ready` → `served`).
-- **Settings & Database Diagnostics (`/admin/settings`)**: Atlas IP whitelist status helper, connection testing tool, and restaurant hours configuration.
-
-### 3. Backend REST API (`/server`)
-- `GET /api/menu` — Fetch all menu items
-- `POST /api/menu` — Add a new menu item
-- `PUT /api/menu/:id` — Update menu item details
-- `PATCH /api/menu/:id/toggle-stock` — Toggle stock availability
-- `DELETE /api/menu/:id` — Remove menu item
-- `GET /api/reservations` — List reservations (optional filters: `status`, `date`)
-- `POST /api/reservations` — Create a new reservation
-- `PATCH /api/reservations/:id/status` — Update booking status
-- `DELETE /api/reservations/:id` — Delete booking
-- `GET /api/pre-orders` — List kitchen pre-orders
-- `POST /api/pre-orders` — Submit new pre-order
-- `PATCH /api/pre-orders/:id/status` — Update order status
-- `GET /api/admin/summary` — Overview metrics and database status
-- `POST /api/admin/reconnect` — Test and reconnect to MongoDB Atlas
-- `POST /api/admin/settings` — Update restaurant settings
+1. **Security Headers & Hardening**:
+   - `Backend/src/middleware/security.ts` applies OWASP-recommended headers: `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `X-XSS-Protection`, and `Strict-Transport-Security`.
+2. **Rate Limiting Protection**:
+   - Sliding-window rate limiter prevents DDoS and brute-force reservation spam on all `/api/*` endpoints.
+3. **CORS Isolation**:
+   - Explicit origin whitelisting in `Backend/src/app.ts` ensuring external unauthorized domains cannot make cross-origin API calls.
+4. **Input Validation & Sanitization**:
+   - Request payloads are validated before database persistence; payload body size is limited to 1MB to prevent memory exhaustion attacks.
+5. **Role & Auth Guarding**:
+   - `Admin/src/context/AuthContext.tsx` handles Firebase token authentication with demo fallback and protected route redirection (`<ProtectedRoute>`).
+6. **Error Masking**:
+   - Centralized error handler ensures database connection strings, credentials, and internal stack traces are never leaked in API responses.
 
 ---
 
-## Getting Started Locally
+## Independent Standalone Execution
 
-### 1. Install Dependencies
+Each folder can be operated independently in its own terminal:
+
+### Running Backend Standalone
 ```bash
+cd Backend
 npm install
-```
-
-### 2. Configure Environment Variables
-Copy `.env.example` to `.env`:
-```bash
-cp .env.example .env
-```
-Fill in your `MONGODB_URI` (optional — runs on in-memory mode if omitted):
-```env
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/panjtara
-```
-
-*Note on MongoDB Atlas:* In your Atlas dashboard under **Network Access**, ensure you add `0.0.0.0/0` (Allow Access from Anywhere) so your environment can connect.
-
-### 3. Start Development Server
-```bash
 npm run dev
+# Starts on http://localhost:5000
 ```
-Both the Express API server and the Vite React frontend run together on **`http://localhost:3000`**.
 
-### 4. Build & Run for Production
+### Running Website Standalone
 ```bash
+cd Website
+npm install
+npm run dev
+# Starts on http://localhost:5173 (proxies API requests to http://localhost:5000)
+```
+
+### Running Admin Portal Standalone
+```bash
+cd Admin
+npm install
+npm run dev
+# Starts on http://localhost:5174 (proxies API requests to http://localhost:5000)
+```
+
+---
+
+## Unified Execution (AI Studio & Cloud Container)
+
+In AI Studio's Cloud Run environment, the unified gateway runs both the API and the frontends together on **Port 3000**:
+```bash
+# Start development server
+npm run dev
+
+# Or build for production
 npm run build
 npm start
 ```
-This builds the client to `dist/` and bundles the backend server into `dist/server.cjs`.

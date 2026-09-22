@@ -2,8 +2,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
-import { createExpressApp } from './server/app.ts';
-import { connectDB } from './server/db.ts';
+import { createBackendApp } from './Backend/src/app.ts';
+import { connectDB } from './Backend/src/config/db.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,7 +12,7 @@ async function startServer() {
   // Connect to Database (or initialize in-memory fallback)
   await connectDB();
 
-  const app = createExpressApp();
+  const app = createBackendApp();
   const PORT = 3000;
 
   if (process.env.NODE_ENV !== 'production') {
