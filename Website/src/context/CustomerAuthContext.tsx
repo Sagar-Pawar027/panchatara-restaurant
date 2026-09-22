@@ -9,6 +9,8 @@ interface CustomerAuthContextType {
   isAuthModalOpen: boolean;
   openAuthModal: () => void;
   closeAuthModal: () => void;
+  signup: (data: { name: string; email: string; password: string; phone: string }) => Promise<{ success: boolean; error?: string }>;
+  login: (data: { identifier: string; password: string }) => Promise<{ success: boolean; error?: string }>;
   sendOtp: (phone: string) => Promise<{ success: boolean; message?: string; devOtp?: string; error?: string }>;
   verifyOtp: (phone: string, otp: string, name?: string) => Promise<{ success: boolean; error?: string }>;
   quickDemoLogin: () => Promise<boolean>;
@@ -46,6 +48,54 @@ export function CustomerAuthProvider({ children }: { children: React.ReactNode }
 
   const openAuthModal = () => setIsAuthModalOpen(true);
   const closeAuthModal = () => setIsAuthModalOpen(false);
+
+  // 0. Signup with Name, Email, Password, and Mobile Number
+  const signup = async (signupData: { name: string; email: string; password: string; phone: string }) => {
+    try {
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(signupData),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        return { success: false, error: data.error || 'Failed to create account.' };
+      }
+
+      setUser(data.user);
+      setToken(data.token);
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(data.user));
+      localStorage.setItem(TOKEN_STORAGE_KEY, data.token);
+      setIsAuthModalOpen(false);
+      return { success: true };
+    } catch (err) {
+      return { success: false, error: (err as Error).message || 'Network error occurred.' };
+    }
+  };
+
+  // 0.1 Login with Email/Phone and Password
+  const login = async (loginData: { identifier: string; password: string }) => {
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginData),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        return { success: false, error: data.error || 'Failed to log in.' };
+      }
+
+      setUser(data.user);
+      setToken(data.token);
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(data.user));
+      localStorage.setItem(TOKEN_STORAGE_KEY, data.token);
+      setIsAuthModalOpen(false);
+      return { success: true };
+    } catch (err) {
+      return { success: false, error: (err as Error).message || 'Network error occurred.' };
+    }
+  };
 
   // 1. Send OTP
   const sendOtp = async (phone: string) => {
@@ -182,6 +232,8 @@ export function CustomerAuthProvider({ children }: { children: React.ReactNode }
         isAuthModalOpen,
         openAuthModal,
         closeAuthModal,
+        signup,
+        login,
         sendOtp,
         verifyOtp,
         quickDemoLogin,

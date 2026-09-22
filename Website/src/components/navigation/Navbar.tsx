@@ -149,11 +149,11 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
               id="header-customer-auth-btn"
               onClick={openAuthModal}
               className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded border border-[#C5A880]/40 hover:border-[#C5A880] bg-[#C5A880]/10 hover:bg-[#C5A880]/20 text-[11px] sm:text-xs font-medium text-[#FAF7F2] transition-colors shrink-0"
-              title={isAuthenticated ? `Logged in as ${user?.name}` : 'Login for express ordering'}
+              title={isAuthenticated ? `Logged in as ${user?.name}` : 'Login or Sign Up for express ordering'}
             >
               <UserIcon className="w-3.5 h-3.5 text-[#C5A880]" />
-              <span className="max-w-[75px] sm:max-w-[100px] truncate">
-                {isAuthenticated ? user?.name?.split(' ')[0] || 'Account' : language === 'hi' ? 'लॉगिन' : 'Login'}
+              <span className="max-w-[85px] sm:max-w-[110px] truncate">
+                {isAuthenticated ? user?.name?.split(' ')[0] || 'Account' : language === 'hi' ? 'लॉगिन / साइन-अप' : 'Login / Sign Up'}
               </span>
             </button>
 

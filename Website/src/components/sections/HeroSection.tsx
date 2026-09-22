@@ -114,45 +114,33 @@ export function HeroSection({
           initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.95, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-2"
+          className="space-y-2 pb-2"
         >
           <h1 className="font-editorial-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-[0.14em] sm:tracking-[0.18em] text-[#FAF7F2] uppercase drop-shadow-md">
             {isHi ? 'पंचतारा' : 'Panchtara'}
           </h1>
         </motion.div>
 
-        {/* Poetic Stanza: A table. A story. An experience. */}
-        <motion.div
-          initial={shouldReduceMotion ? {} : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 0.45 }}
-          className="space-y-1.5 text-base sm:text-xl md:text-2xl font-editorial-serif text-[#FAF7F2]/90 font-light italic tracking-wide"
-        >
-          <p className="leading-snug">{isHi ? 'एक टेबल।' : 'A table.'}</p>
-          <p className="leading-snug">{isHi ? 'एक दास्तान।' : 'A story.'}</p>
-          <p className="leading-snug text-[#C5A880]">{isHi ? 'एक अनुपम अनुभव।' : 'An experience.'}</p>
-        </motion.div>
-
         {/* Primary Action Buttons: [ Reserve Your Table ] [ Pre-Order Your Meal ] */}
         <motion.div
           initial={shouldReduceMotion ? {} : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 0.55 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 max-w-lg mx-auto pt-2"
+          transition={{ duration: 0.85, delay: 0.5 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 max-w-lg mx-auto pt-4"
         >
           <button
             id="hero-reserve-btn"
             onClick={onReserveTable}
-            className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#C5A880] text-[#12110F] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm hover:bg-[#dfcaab] transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#C5A880]/20"
+            className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#C5A880]/70 bg-black/40 hover:bg-[#C5A880]/15 hover:border-[#C5A880] text-[#FAF7F2] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all transform hover:-translate-y-0.5 backdrop-blur-md shadow-md"
           >
-            <Calendar className="w-3.5 h-3.5 text-[#12110F]" />
+            <Calendar className="w-3.5 h-3.5 text-[#C5A880]" />
             <span>{t('hero.reserve')}</span>
           </button>
 
           <button
             id="hero-preorder-btn"
             onClick={onPreOrderMeal}
-            className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#C5A880]/60 bg-black/40 hover:bg-[#C5A880]/15 text-[#FAF7F2] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all transform hover:-translate-y-0.5 backdrop-blur-md"
+            className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#C5A880]/60 bg-black/40 hover:bg-[#C5A880]/15 hover:border-[#C5A880] text-[#FAF7F2] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all transform hover:-translate-y-0.5 backdrop-blur-md shadow-md"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
             <span>{t('hero.preorder')}</span>

@@ -1,8 +1,235 @@
 import { Router, Request, Response } from 'express';
+import crypto from 'crypto';
 import { UserModel } from '../models/User.ts';
 import { memoryStore, isMongoDBConnected } from '../config/db.ts';
 
 export const authRouter = Router();
+
+function hashPassword(password: string): string {
+  return crypto.createHash('sha256').update(password + '_panjtara_secret_salt').digest('hex');
+}
+
+// 0. Signup with Name, Email, Password, and Mobile Number
+authRouter.post('/signup', async (req: Request, res: Response) => {
+  try {
+    const { name, email, password, phone } = req.body;
+
+    // Strict validation
+    if (!name || name.trim().length < 2) {
+      return res.status(400).json({ success: false, error: 'Please enter your full name (minimum 2 characters).' });
+    }
+
+    if (!email || !/^\S+@\S+\.\S+$/.test(email.trim())) {
+      return res.status(400).json({ success: false, error: 'Please enter a valid email address.' });
+    }
+
+    if (!password || password.length < 6) {
+      return res.status(400).json({ success: false, error: 'Password must be at least 6 characters long.' });
+    }
+
+    if (!phone) {
+      return res.status(400).json({ success: false, error: 'Mobile number is required.' });
+    }
+
+    const cleanPhone = phone.replace(/[^0-9]/g, '');
+    if (cleanPhone.length < 10) {
+      return res.status(400).json({ success: false, error: 'Please enter a valid 10-digit mobile number.' });
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanName = name.trim();
+    const passwordHash = hashPassword(password);
+
+    const defaultAddress = {
+      id: `addr-${Date.now()}`,
+      label: 'Home' as const,
+      flat: 'Plot No. 12',
+      street: 'Bypass Road',
+      area: 'Bicholi Mardana / Indore Bypass',
+      city: 'Indore',
+      pincode: '452016',
+      isDefault: true,
+    };
+
+    if (isMongoDBConnected()) {
+      // Check if user with this email or phone exists
+      const existingUser = await (UserModel as any).findOne({
+        $or: [{ email: cleanEmail }, { phone: cleanPhone }],
+      });
+
+      if (existingUser) {
+        if (existingUser.phone === cleanPhone) {
+          return res.status(400).json({
+            success: false,
+            error: 'An account with this mobile number already exists. Please log in instead.',
+          });
+        }
+        return res.status(400).json({
+          success: false,
+          error: 'An account with this email address already exists. Please log in instead.',
+        });
+      }
+
+      const newUser = await (UserModel as any).create({
+        name: cleanName,
+        email: cleanEmail,
+        phone: cleanPhone,
+        password: passwordHash,
+        addresses: [defaultAddress],
+      });
+
+      const userObj = newUser.toObject();
+      delete userObj.password;
+
+      return res.status(201).json({
+        success: true,
+        message: 'Account created successfully!',
+        user: userObj,
+        token: `cust-${newUser._id}`,
+      });
+    }
+
+    // Memory Store Fallback
+    const existing = (memoryStore as any).users.find(
+      (u: any) =>
+        (u.email && u.email.toLowerCase() === cleanEmail) ||
+        u.phone === cleanPhone
+    );
+
+    if (existing) {
+      if (existing.phone === cleanPhone) {
+        return res.status(400).json({
+          success: false,
+          error: 'An account with this mobile number already exists. Please log in instead.',
+        });
+      }
+      return res.status(400).json({
+        success: false,
+        error: 'An account with this email address already exists. Please log in instead.',
+      });
+    }
+
+    const newUser = {
+      _id: `usr-${Date.now()}`,
+      name: cleanName,
+      email: cleanEmail,
+      phone: cleanPhone,
+      password: passwordHash,
+      addresses: [defaultAddress],
+      createdAt: new Date().toISOString(),
+    };
+
+    (memoryStore as any).users.push(newUser);
+
+    const userObj = { ...newUser };
+    delete (userObj as any).password;
+
+    return res.status(201).json({
+      success: true,
+      message: 'Account created successfully!',
+      user: userObj,
+      token: `cust-${newUser._id}`,
+    });
+  } catch (error) {
+    console.error('Signup error:', error);
+    return res.status(500).json({ success: false, error: (error as Error).message });
+  }
+});
+
+// 0.1 Login with Email or Phone and Password
+authRouter.post('/login', async (req: Request, res: Response) => {
+  try {
+    const { identifier, password } = req.body;
+
+    if (!identifier || !identifier.trim()) {
+      return res.status(400).json({ success: false, error: 'Please enter your email or mobile number.' });
+    }
+
+    if (!password) {
+      return res.status(400).json({ success: false, error: 'Please enter your password.' });
+    }
+
+    const cleanIdentifier = identifier.trim();
+    const isEmail = cleanIdentifier.includes('@');
+    const cleanPhone = cleanIdentifier.replace(/[^0-9]/g, '');
+    const passwordHash = hashPassword(password);
+
+    if (isMongoDBConnected()) {
+      let query: any = {};
+      if (isEmail) {
+        query = { email: cleanIdentifier.toLowerCase() };
+      } else {
+        query = { phone: cleanPhone.slice(-10) };
+      }
+
+      const user = await (UserModel as any).findOne(query);
+
+      if (!user) {
+        return res.status(400).json({
+          success: false,
+          error: `No account found with this ${isEmail ? 'email' : 'mobile number'}. Please sign up.`,
+        });
+      }
+
+      // Check password
+      if (user.password && user.password !== passwordHash) {
+        return res.status(400).json({ success: false, error: 'Incorrect password. Please check and try again.' });
+      }
+
+      // If user had no password yet (e.g. from previous OTP session), set it now
+      if (!user.password) {
+        user.password = passwordHash;
+        await user.save();
+      }
+
+      const userObj = user.toObject();
+      delete userObj.password;
+
+      return res.json({
+        success: true,
+        message: 'Logged in successfully!',
+        user: userObj,
+        token: `cust-${user._id}`,
+      });
+    }
+
+    // Memory Store Fallback
+    const user = (memoryStore as any).users.find((u: any) => {
+      if (isEmail) {
+        return u.email && u.email.toLowerCase() === cleanIdentifier.toLowerCase();
+      }
+      return u.phone === cleanPhone.slice(-10) || u.phone === cleanPhone;
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        error: `No account found with this ${isEmail ? 'email' : 'mobile number'}. Please sign up.`,
+      });
+    }
+
+    if (user.password && user.password !== passwordHash) {
+      return res.status(400).json({ success: false, error: 'Incorrect password. Please check and try again.' });
+    }
+
+    if (!user.password) {
+      user.password = passwordHash;
+    }
+
+    const userObj = { ...user };
+    delete (userObj as any).password;
+
+    return res.json({
+      success: true,
+      message: 'Logged in successfully!',
+      user: userObj,
+      token: `cust-${user._id}`,
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    return res.status(500).json({ success: false, error: (error as Error).message });
+  }
+});
 
 // Store temporary OTPs in memory
 const otpStore = new Map<string, { otp: string; expires: number }>();

@@ -51,9 +51,13 @@ export interface SignatureDish {
 export interface PhilosophyPrinciple {
   number: string;
   title: string;
+  hindiTitle?: string;
   tagline: string;
+  hindiTagline?: string;
   description: string;
+  hindiDescription?: string;
   quote: string;
+  hindiQuote?: string;
   culturalElement: string;
 }
 
@@ -95,10 +99,15 @@ export interface RestaurantInfo {
   tagline: string;
   subheading: string;
   storyHeadline: string;
+  hindiStoryHeadline?: string;
   storyLead: string;
+  hindiStoryLead?: string;
   storyParagraph1: string;
+  hindiStoryParagraph1?: string;
   storyParagraph2: string;
+  hindiStoryParagraph2?: string;
   storyQuote: string;
+  hindiStoryQuote?: string;
   address: {
     line1: string;
     area: string;

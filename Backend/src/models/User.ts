@@ -16,6 +16,7 @@ export interface IUser extends Document {
   name: string;
   phone: string;
   email?: string;
+  password?: string;
   addresses: IUserAddress[];
   createdAt: Date;
   updatedAt: Date;
@@ -26,6 +27,7 @@ const UserSchema: Schema = new Schema(
     name: { type: String, required: true, trim: true },
     phone: { type: String, required: true, trim: true, unique: true },
     email: { type: String, trim: true, lowercase: true },
+    password: { type: String },
     addresses: [
       {
         id: { type: String, required: true },

@@ -52,9 +52,9 @@ export function StickyBookingBar({ onReserve, onPreOrder }: StickyBookingBarProp
               <button
                 id="sticky-bar-reserve-btn"
                 onClick={onReserve}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 bg-[#C5A880] text-[#12110F] text-xs uppercase tracking-widest font-semibold rounded-full hover:bg-[#dfcaab] transition-colors shadow-sm"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 border border-[#C5A880]/70 bg-black/50 hover:bg-[#C5A880]/15 hover:border-[#C5A880] text-[#FAF7F2] text-xs uppercase tracking-widest font-semibold rounded-full transition-colors shadow-sm"
               >
-                <Calendar className="w-3.5 h-3.5" />
+                <Calendar className="w-3.5 h-3.5 text-[#C5A880]" />
                 <span>{language === 'hi' ? 'टेबल बुक करें' : 'Reserve Table'}</span>
               </button>
 
