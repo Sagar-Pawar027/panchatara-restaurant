@@ -56,7 +56,7 @@ function CustomerLayout() {
   const { isCartOpen, openCart, closeCart } = useCart();
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1A17] relative selection:bg-[#C5A880]/30 selection:text-[#181614] flex flex-col justify-between">
+    <div className="min-h-[100dvh] bg-[#FAF7F2] text-[#1C1A17] relative selection:bg-[#C5A880]/30 selection:text-[#181614] flex flex-col justify-between">
       {/* Accessible Skip Link */}
       <a
         href="#main-content"

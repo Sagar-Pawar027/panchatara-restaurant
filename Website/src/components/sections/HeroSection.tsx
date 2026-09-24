@@ -47,7 +47,7 @@ export function HeroSection({
       ref={containerRef}
       id="hero"
       aria-label="Welcome to Panchtara"
-      className="relative w-full min-h-screen flex flex-col justify-between items-center text-center text-[#FAF7F2] overflow-hidden bg-[#0A0908] pt-28 sm:pt-32 pb-14 px-4 sm:px-6 select-none"
+      className="relative w-full min-h-[100dvh] flex flex-col justify-between items-center text-center text-[#FAF7F2] bg-[#0A0908] pt-[calc(env(safe-area-inset-top,0px)+5rem)] sm:pt-32 pb-10 sm:pb-14 px-4 sm:px-6 select-none"
     >
       {/* Background Image with Parallax and Layered Vignettes */}
       <motion.div
@@ -59,7 +59,7 @@ export function HeroSection({
                 scale: bgScale,
               }
         }
-        className="absolute inset-0 z-0 pointer-events-none will-change-transform"
+        className="absolute inset-0 z-0 pointer-events-none will-change-transform overflow-hidden"
       >
         <img
           src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2400&q=85"

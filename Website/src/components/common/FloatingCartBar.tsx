@@ -39,7 +39,7 @@ export function FloatingCartBar() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 90, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-3 sm:bottom-6 inset-x-3 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-40 max-w-2xl w-[calc(100%-1.5rem)] sm:w-auto"
+            className="fixed bottom-[calc(env(safe-area-inset-bottom,0px)+0.875rem)] sm:bottom-6 inset-x-3 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-40 max-w-2xl w-[calc(100%-1.5rem)] sm:w-auto"
           >
             <div className="bg-[#12110F]/95 backdrop-blur-md border border-[#C5A880]/50 rounded-2xl sm:rounded-full p-2.5 sm:p-2 sm:pl-5 shadow-[0_12px_40px_rgba(0,0,0,0.6)] flex flex-col sm:flex-row items-center justify-between gap-3 text-[#FAF7F2]">
               {/* Order summary info */}

@@ -132,7 +132,7 @@ export function RoyalConciergeCharacter({ onReserve, onOrder }: RoyalConciergeCh
       id="royal-concierge-container"
       className={`fixed z-30 select-none print:hidden pointer-events-auto transition-all duration-300 ${
         hasBottomBarOnMobile ? 'hidden sm:block' : 'block'
-      } bottom-3 sm:bottom-6 left-3 sm:left-6`}
+      } bottom-[calc(env(safe-area-inset-bottom,0px)+0.875rem)] sm:bottom-6 left-3 sm:left-6`}
     >
       <AnimatePresence>
         {/* Expanded Concierge Welcoming Dialogue Card */}

@@ -65,10 +65,10 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
     <>
       <header
         id="panchtara-main-header"
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 pt-[calc(env(safe-area-inset-top,0px)+0.65rem)] pb-2.5 sm:pt-[calc(env(safe-area-inset-top,0px)+0.875rem)] sm:pb-3.5 ${
           isSolidNav
-            ? 'bg-[#12110F] md:bg-[#12110F]/95 backdrop-blur-md py-3.5 border-b border-[#C5A880]/20 shadow-xl text-[#FAF7F2]'
-            : 'bg-gradient-to-b from-[#12110F]/90 via-[#12110F]/50 to-transparent py-5 text-[#FAF7F2]'
+            ? 'bg-[#12110F] md:bg-[#12110F]/95 backdrop-blur-md border-b border-[#C5A880]/20 shadow-xl text-[#FAF7F2]'
+            : 'bg-gradient-to-b from-[#12110F]/95 via-[#12110F]/70 to-transparent text-[#FAF7F2]'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
@@ -175,7 +175,7 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
             <button
               id="header-order-online-btn"
               onClick={() => openCart('delivery')}
-              className="relative inline-flex items-center gap-1.5 px-3 py-2 text-[11px] uppercase tracking-wider font-semibold text-[#FAF7F2] hover:text-[#C5A880] border border-emerald-500/40 bg-emerald-950/30 hover:bg-emerald-900/40 transition-all rounded-sm backdrop-blur-sm whitespace-nowrap shadow-sm"
+              className="relative hidden md:inline-flex items-center gap-1.5 px-3 py-2 text-[11px] uppercase tracking-wider font-semibold text-[#FAF7F2] hover:text-[#C5A880] border border-emerald-500/40 bg-emerald-950/30 hover:bg-emerald-900/40 transition-all rounded-sm backdrop-blur-sm whitespace-nowrap shadow-sm"
               title={language === 'hi' ? '0% कमीशन ऑनलाइन ऑर्डर' : 'Direct Online Delivery (0% Commission)'}
             >
               <Bike className="w-3.5 h-3.5 text-emerald-400" />
@@ -191,7 +191,7 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
             <button
               id="header-reserve-table-btn"
               onClick={() => handleLinkClick('/reservation')}
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 text-xs uppercase tracking-widest font-medium text-[#12110F] bg-[#C5A880] hover:bg-[#dfcaab] transition-all rounded-sm shadow-sm whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-1 px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider sm:tracking-widest font-medium text-[#12110F] bg-[#C5A880] hover:bg-[#dfcaab] transition-all rounded-sm shadow-sm whitespace-nowrap shrink-0"
             >
               <span>{language === 'hi' ? 'बुक करें' : 'Reserve'}</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -214,7 +214,7 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileMenuOpen}
-              className="xl:hidden min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-[#FAF7F2] hover:text-[#C5A880] transition-colors focus:outline-none shrink-0"
+              className="xl:hidden min-w-[40px] min-h-[40px] flex items-center justify-center p-1.5 text-[#FAF7F2] hover:text-[#C5A880] transition-colors focus:outline-none shrink-0"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -231,7 +231,7 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-30 xl:hidden bg-[#12110F] text-[#FAF7F2] flex flex-col justify-between pt-24 pb-8 px-6 sm:px-8 overflow-y-auto"
+            className="fixed inset-0 z-30 xl:hidden bg-[#12110F] text-[#FAF7F2] flex flex-col justify-between pt-[calc(env(safe-area-inset-top,0px)+5.5rem)] pb-[calc(env(safe-area-inset-bottom,0px)+2rem)] px-6 sm:px-8 overflow-y-auto"
           >
             <div className="space-y-6">
               {/* Mobile Language Selector */}

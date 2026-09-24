@@ -50,7 +50,7 @@ export function Footer({ onNavigate }: FooterProps) {
   return (
     <footer
       id="panchtara-footer"
-      className="bg-[#0D0C0A] text-[#FAF7F2] pt-24 pb-12 border-t border-white/10 select-none"
+      className="bg-[#0D0C0A] text-[#FAF7F2] pt-20 sm:pt-24 pb-[calc(env(safe-area-inset-bottom,0px)+6.5rem)] sm:pb-24 border-t border-white/10 select-none"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Top Section with Brandmark and Newsletter */}
