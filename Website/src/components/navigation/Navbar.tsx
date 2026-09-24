@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import { Menu, X, ArrowUpRight, Phone, Utensils, ShieldCheck, Globe, User as UserIcon, ShoppingBag, Bike, Percent } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Phone, Utensils, ShieldCheck, Globe, User as UserIcon, ShoppingBag, Bike, Percent, MessageCircle } from 'lucide-react';
 import { RESTAURANT_INFO } from '../../data/restaurant.ts';
 import { useLanguage } from '../../context/LanguageContext.tsx';
 import { useCustomerAuth } from '../../context/CustomerAuthContext.tsx';
@@ -187,18 +187,6 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
               )}
             </button>
 
-            {/* Pre-Order CTA (Desktop) */}
-            {onPreOrderClick && (
-              <button
-                id="header-preorder-meal-btn"
-                onClick={() => openCart('dine-in')}
-                className="hidden 2xl:inline-flex items-center gap-1.5 px-3 py-2 text-[11px] uppercase tracking-widest font-medium text-[#FAF7F2] hover:text-[#C5A880] border border-white/20 hover:border-[#C5A880]/50 transition-all rounded-sm backdrop-blur-sm whitespace-nowrap"
-                title="Pre-reserve table with 50% advance deposit"
-              >
-                <span>{language === 'hi' ? 'प्री-रिजर्व (50%)' : 'Pre-Reserve (50%)'}</span>
-              </button>
-            )}
-
             {/* Reserve CTA */}
             <button
               id="header-reserve-table-btn"
@@ -352,23 +340,6 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
                 )}
               </button>
 
-              {/* Pre-Reserve Table + Food on Mobile */}
-              <button
-                id="mobile-menu-prereserve-action"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  openCart('dine-in');
-                }}
-                className="w-full py-3 px-4 rounded bg-[#C5A880]/15 border border-[#C5A880]/40 text-[#FAF7F2] font-semibold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-              >
-                <Utensils className="w-4 h-4 text-[#C5A880]" />
-                <span>
-                  {language === 'hi'
-                    ? '🍽️ टेबल व भोजन प्री-बुक करें (50% अग्रिम)'
-                    : '🍽️ Pre-Reserve Table & Meal (50% Deposit)'}
-                </span>
-              </button>
-
               {/* My Orders Button on Mobile */}
               {onOpenOrders && (
                 <button
@@ -387,10 +358,22 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
               <button
                 id="mobile-menu-reserve-action"
                 onClick={() => handleLinkClick('/reservation')}
-                className="w-full py-3.5 px-6 rounded bg-[#C5A880] text-[#12110F] font-medium text-xs uppercase tracking-[0.2em] hover:bg-[#dfcaab] transition-colors text-center block"
+                className="w-full py-3.5 px-6 rounded bg-[#C5A880] text-[#12110F] font-medium text-xs uppercase tracking-[0.2em] hover:bg-[#dfcaab] transition-colors text-center block shadow-md"
               >
                 {language === 'hi' ? 'अपनी टेबल बुक करें' : 'Reserve Your Table'}
               </button>
+
+              {/* WhatsApp Concierge Desk on Mobile Drawer */}
+              <a
+                id="mobile-menu-whatsapp-concierge"
+                href="https://wa.me/919876543210?text=Namaste!%20I%20would%20like%20assistance%20with%20table%20booking%20or%20dining%20at%20Panjtara%20Pure%20Veg%2C%20Indore."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 px-4 rounded bg-[#1C1814] border border-[#C5A880]/30 hover:border-[#C5A880]/60 text-[#FAF7F2] font-medium text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-[#C5A880]" />
+                <span>{language === 'hi' ? 'शाही आतिथ्य सहायता (व्हाट्सएप)' : 'WhatsApp Royal Concierge'}</span>
+              </a>
 
               <button
                 id="mobile-menu-admin-action"

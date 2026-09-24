@@ -252,7 +252,7 @@ export function CustomerAuthModal({ onViewOrders }: CustomerAuthModalProps) {
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          className="relative w-full max-w-md bg-[#161412] text-[#FAF7F2] rounded-2xl border border-[#C5A880]/30 shadow-2xl overflow-hidden z-10 my-8"
+          className="relative w-full max-w-md bg-[#161412] text-[#FAF7F2] rounded-2xl border border-[#C5A880]/30 shadow-2xl overflow-y-auto max-h-[92vh] z-10 my-4 sm:my-8 scrollbar-thin"
         >
           {/* Top Decorative Header */}
           <div className="bg-gradient-to-r from-[#231E18] via-[#1A1815] to-[#141210] p-6 border-b border-[#C5A880]/20 flex items-start justify-between">

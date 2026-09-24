@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Calendar, Utensils, X, Sparkles } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext.tsx';
+import { useCart } from '../../context/CartContext.tsx';
 
 interface StickyBookingBarProps {
   onReserve: () => void;
@@ -12,6 +13,7 @@ export function StickyBookingBar({ onReserve, onPreOrder }: StickyBookingBarProp
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const { language } = useLanguage();
+  const { itemCount } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +29,7 @@ export function StickyBookingBar({ onReserve, onPreOrder }: StickyBookingBarProp
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isDismissed]);
 
-  if (isDismissed) return null;
+  if (isDismissed || itemCount > 0) return null;
 
   return (
     <AnimatePresence>

@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
-import { Utensils, Calendar, Sparkles, ArrowRight, ArrowDown } from 'lucide-react';
-import { RESTAURANT_INFO } from '../../data/restaurant.ts';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext.tsx';
+import { RoyalCrestSticker } from '../common/ThemeStickers.tsx';
 
 interface HeroSectionProps {
   onReserveTable: () => void;
@@ -94,6 +94,11 @@ export function HeroSection({
         <span className="sm:hidden">{isHi ? '100% शुद्ध शाकाहारी • इंदौर बायपास' : '100% Pure Veg • Indore Bypass'}</span>
       </motion.div>
 
+      {/* Floating Royal Animated Crest Sticker */}
+      <div className="absolute top-24 sm:top-28 right-4 sm:right-8 lg:right-14 z-20 hidden md:block pointer-events-auto">
+        <RoyalCrestSticker size="md" />
+      </div>
+
       {/* Centerpiece Presentation */}
       <motion.div
         style={shouldReduceMotion ? {} : { opacity: contentOpacity, y: contentY }}
@@ -121,38 +126,12 @@ export function HeroSection({
           </h1>
         </motion.div>
 
-        {/* Primary Action Buttons: [ Reserve Your Table ] [ Pre-Order Your Meal ] */}
-        <motion.div
-          initial={shouldReduceMotion ? {} : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 max-w-lg mx-auto pt-4"
-        >
-          <button
-            id="hero-reserve-btn"
-            onClick={onReserveTable}
-            className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#C5A880]/70 bg-black/40 hover:bg-[#C5A880]/15 hover:border-[#C5A880] text-[#FAF7F2] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all transform hover:-translate-y-0.5 backdrop-blur-md shadow-md"
-          >
-            <Calendar className="w-3.5 h-3.5 text-[#C5A880]" />
-            <span>{t('hero.reserve')}</span>
-          </button>
-
-          <button
-            id="hero-preorder-btn"
-            onClick={onPreOrderMeal}
-            className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#C5A880]/60 bg-black/40 hover:bg-[#C5A880]/15 hover:border-[#C5A880] text-[#FAF7F2] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all transform hover:-translate-y-0.5 backdrop-blur-md shadow-md"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
-            <span>{t('hero.preorder')}</span>
-          </button>
-        </motion.div>
-
         {/* Interactive "CHOOSE YOUR EXPERIENCE" (Section 40) */}
         <motion.div
           initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.7 }}
-          className="pt-6 sm:pt-10 max-w-3xl mx-auto"
+          transition={{ duration: 0.9, delay: 0.5 }}
+          className="pt-2 sm:pt-4 max-w-3xl mx-auto"
         >
           <div className="bg-[#12110F]/85 border border-[#C5A880]/30 rounded-sm p-5 sm:p-7 backdrop-blur-md shadow-2xl relative">
             {/* Top Eyebrow & Prompt */}
@@ -163,6 +142,36 @@ export function HeroSection({
               <h2 className="font-editorial-serif text-xl sm:text-2xl text-[#FAF7F2] font-light">
                 {isHi ? 'आप पंचतारा का अनुभव कैसे करना चाहेंगे?' : 'How would you like to experience Panchtara?'}
               </h2>
+            </div>
+
+            {/* Royal Concierge Welcome Banner */}
+            <div className="flex items-center gap-3 p-3 sm:p-3.5 mb-5 rounded-lg bg-gradient-to-r from-[#241F1A]/95 via-[#1A1713]/90 to-[#141210]/80 border border-[#C5A880]/40 text-left shadow-lg">
+              <div className="relative shrink-0">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#C5A880] shadow-md bg-[#241F1A]">
+                  <img
+                    src="/images/royal_concierge.jpg"
+                    alt="Maharaj Raghuveer Ji"
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-[#12110F]" />
+              </div>
+              <div className="space-y-0.5 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-editorial-serif text-xs sm:text-sm font-semibold text-[#FAF7F2]">
+                    {isHi ? 'महाराज रघुवीर जी की ओर से सादर प्रणाम 🙏' : 'Namaste from Maharaj Raghuveer Ji 🙏'}
+                  </span>
+                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#C5A880]/20 text-[#C5A880] font-mono uppercase tracking-wider hidden sm:inline-block">
+                    {isHi ? 'मुख्य आतिथ्य' : 'Head Concierge'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-[#FAF7F2]/80 font-light leading-relaxed">
+                  {isHi
+                    ? '"पंचतारा में आपका हार्दिक स्वागत है। क्या आप आज शाम की टेबल आरक्षित करेंगे या घर के लिए ताज़ा शाही भोजन मंगवाएंगे?"'
+                    : '"Welcome to Panchtara Pure Veg. Shall I reserve a royal table for your evening, or dispatch our pure veg delicacies directly to your home?"'}
+                </p>
+              </div>
             </div>
 
             {/* 2 Conversion Choice Cards */}

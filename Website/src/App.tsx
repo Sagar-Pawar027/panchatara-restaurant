@@ -44,6 +44,7 @@ import { CustomerAuthProvider } from './context/CustomerAuthContext.tsx';
 import { CartProvider, useCart } from './context/CartContext.tsx';
 import { CustomerAuthModal } from './components/auth/CustomerAuthModal.tsx';
 import { CustomerOrdersModal } from './components/orders/CustomerOrdersModal.tsx';
+import { RoyalConciergeCharacter } from './components/common/RoyalConciergeCharacter.tsx';
 
 function CustomerLayout() {
   const navigate = useNavigate();
@@ -128,6 +129,12 @@ function CustomerLayout() {
 
       {/* Zomato-Style Persistent Floating Cart Bar with 0% Commission Badge */}
       <FloatingCartBar />
+
+      {/* Royal Concierge Character Host (Welcomes & engages guest to book table or order food) */}
+      <RoyalConciergeCharacter
+        onReserve={() => navigate('/reservation')}
+        onOrder={() => openCart('delivery')}
+      />
 
       {/* Pre-Order & Online Delivery Checkout Concierge Modal */}
       <PreOrderModal

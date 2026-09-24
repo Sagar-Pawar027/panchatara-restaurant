@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { RESTAURANT_INFO } from '../../data/restaurant.ts';
 import { useLanguage } from '../../context/LanguageContext.tsx';
+import { DesiGheeSealSticker } from '../common/ThemeStickers.tsx';
 
 interface StorySectionProps {
   onExploreSignatures: () => void;
@@ -157,6 +158,11 @@ export function StorySection({ onExploreSignatures }: StorySectionProps) {
                 </p>
               </div>
             </motion.div>
+
+            {/* Floating Royal Pure Desi Ghee Sticker */}
+            <div className="absolute -bottom-6 -left-3 sm:-left-6 z-20">
+              <DesiGheeSealSticker />
+            </div>
 
             {/* Subtle decorative offset border box */}
             <div className="hidden sm:block absolute -bottom-6 -right-6 w-48 h-48 border border-[#C5A880]/30 -z-10 pointer-events-none" />

@@ -54,22 +54,15 @@ export function MenuPage({ onSelectDish }: MenuPageProps) {
             </span>
           </div>
 
-          {/* Quick Dual Action Buttons */}
+          {/* Quick Action Button */}
           <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
             <button
+              id="menu-banner-order-delivery-btn"
               onClick={() => openCart('delivery')}
               className="px-5 py-2.5 rounded bg-emerald-950/80 border border-emerald-500/50 hover:bg-emerald-900/90 text-emerald-300 font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md transition-all"
             >
               <Bike className="w-4 h-4 text-emerald-400" />
               <span>{isHi ? 'ऑनलाइन फूड ऑर्डर करें (0% शुल्क)' : 'Order Food Online (0% Commission)'}</span>
-            </button>
-
-            <button
-              onClick={() => openCart('dine-in')}
-              className="px-5 py-2.5 rounded bg-[#C5A880] hover:bg-[#dfcaab] text-[#12110F] font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md transition-all"
-            >
-              <Utensils className="w-4 h-4 text-[#12110F]" />
-              <span>{isHi ? 'टेबल व भोजन प्री-बुक करें (50% अग्रिम)' : 'Pre-Reserve Table + Food (Pay 50% Now)'}</span>
             </button>
           </div>
         </div>

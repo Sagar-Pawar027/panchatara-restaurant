@@ -5,6 +5,7 @@ import { MenuCategoryKey, MenuItem } from '../../types/index.ts';
 import { MENU_CATEGORIES, MENU_ITEMS } from '../../data/menu.ts';
 import { useLanguage } from '../../context/LanguageContext.tsx';
 import { useCart } from '../../context/CartContext.tsx';
+import { SatvikBadgeSticker, HeritageStampSticker } from '../common/ThemeStickers.tsx';
 
 interface InteractiveMenuSectionProps {
   onSelectDish: (dish: MenuItem) => void;
@@ -108,6 +109,8 @@ export function InteractiveMenuSection({ onSelectDish, onReserveTable }: Interac
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            <SatvikBadgeSticker className="hidden sm:inline-block" />
+
             <button
               id="menu-quick-order-cta"
               onClick={() => openCart('delivery')}
@@ -115,14 +118,6 @@ export function InteractiveMenuSection({ onSelectDish, onReserveTable }: Interac
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               <span>{isHi ? 'ऑनलाइन फूड ऑर्डर करें' : 'Order Food Online (0% Fee)'}</span>
-            </button>
-
-            <button
-              id="menu-pre-reserve-cta"
-              onClick={() => openCart('dine-in')}
-              className="px-4 py-2.5 rounded bg-white/10 hover:bg-white/15 border border-[#C5A880]/50 text-[#FAF7F2] text-xs uppercase tracking-wider font-medium transition-colors"
-            >
-              {isHi ? 'टेबल प्री-रिजर्व (50% अग्रिम)' : 'Pre-Reserve Table (50% Now)'}
             </button>
           </div>
         </div>
