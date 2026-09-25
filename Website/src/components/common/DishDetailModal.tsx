@@ -281,6 +281,7 @@ export function DishDetailModal({ dish, onClose, onReserveClick }: DishDetailMod
                 {/* 1. Add to Online Order (Zomato-style Delivery) */}
                 <button
                   id="dish-modal-order-online-btn"
+                  type="button"
                   onClick={() => handleAddToOrder(true)}
                   className="py-3 px-4 rounded-lg bg-[#C5A880] hover:bg-[#dfcaab] text-[#12110F] font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-98"
                 >
@@ -293,6 +294,7 @@ export function DishDetailModal({ dish, onClose, onReserveClick }: DishDetailMod
                 {/* 2. Pre-reserve Table with this Food (Pay 50% Now) */}
                 <button
                   id="dish-modal-prereserve-table-btn"
+                  type="button"
                   onClick={handlePreReserveTable}
                   className="py-3 px-4 rounded-lg bg-[#27231E] hover:bg-[#342F29] border border-[#C5A880]/50 text-[#FAF7F2] font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 active:scale-98"
                 >
@@ -316,6 +318,7 @@ export function DishDetailModal({ dish, onClose, onReserveClick }: DishDetailMod
 
                 <button
                   id="dish-modal-dismiss-btn"
+                  type="button"
                   onClick={onClose}
                   className="text-white/50 hover:text-white text-[11px] uppercase tracking-widest transition-colors"
                 >

@@ -79,10 +79,11 @@ export function FloatingCartBar() {
                 {/* Mobile direct order button */}
                 <button
                   id="mobile-floating-cart-btn"
+                  type="button"
                   onClick={() => openCart()}
                   className="sm:hidden px-4 py-2 bg-[#C5A880] text-[#12110F] text-xs uppercase tracking-wider font-bold rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition-transform"
                 >
-                  <span>{orderType === 'dine-in' ? 'Pre-Book' : 'Checkout'}</span>
+                  <span>{orderType === 'dine-in' ? 'Pre-Book' : 'View Order'}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -96,13 +97,14 @@ export function FloatingCartBar() {
 
                 <button
                   id="floating-cart-checkout-btn"
+                  type="button"
                   onClick={() => openCart()}
                   className="px-5 py-2.5 bg-[#C5A880] hover:bg-[#dfcaab] text-[#12110F] text-xs uppercase tracking-widest font-bold rounded-full flex items-center gap-2 transition-all shadow-md hover:shadow-lg active:scale-95"
                 >
                   <span>
                     {orderType === 'dine-in'
-                      ? isHi ? 'टेबल बुक व प्री-ऑर्डर →' : 'Book Table & Pre-Order (50% Now)'
-                      : isHi ? 'ऑर्डर पूरा करें →' : 'Order Now • Direct Delivery'}
+                      ? isHi ? 'ऑर्डर साइडबार खोलें →' : 'View Order Sidebar (50% Now) →'
+                      : isHi ? 'ऑर्डर साइडबार खोलें →' : 'View Order Sidebar →'}
                   </span>
                   <ArrowRight className="w-4 h-4" />
                 </button>

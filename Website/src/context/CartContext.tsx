@@ -118,6 +118,7 @@ interface CartContextType {
   deliveryFee: number;
   openCart: (type?: OrderType) => void;
   closeCart: () => void;
+  addMultipleItems: (dishes: { id?: string; name: string; hindiName?: string; price: number; quantity: number }[]) => void;
   toastMessage: string | null;
   playSuccessSound: () => void;
 }
@@ -143,27 +144,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // fallback
     }
-    // Default starter item to give user an immediate taste
-    return [
-      {
-        id: 'paneer-lababdar',
-        name: 'Paneer Lababdar Special',
-        hindiName: 'पनीर लबाबदार',
-        price: 340,
-        quantity: 1,
-        category: 'Main Course',
-        image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80',
-        isSignature: true,
-      },
-      {
-        id: 'm-butter-naan',
-        name: 'Butter Naan',
-        hindiName: 'बटर नान',
-        price: 55,
-        quantity: 2,
-        category: 'Breads',
-      },
-    ];
+    // Start with empty cart (or restored from user's active session)
+    return [];
   });
 
   const [orderType, setOrderType] = useState<OrderType>(() => {
@@ -301,6 +283,35 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems([]);
   };
 
+  const addMultipleItems = (dishes: { id?: string; name: string; hindiName?: string; price: number; quantity: number }[]) => {
+    setItems((prev) => {
+      const updated = [...prev];
+      dishes.forEach((d) => {
+        const dishId = d.id || d.name.toLowerCase().replace(/\s+/g, '-');
+        const existingIdx = updated.findIndex((i) => i.id === dishId || i.name.toLowerCase() === d.name.toLowerCase());
+        if (existingIdx >= 0) {
+          updated[existingIdx] = {
+            ...updated[existingIdx],
+            quantity: updated[existingIdx].quantity + (d.quantity || 1),
+          };
+        } else {
+          updated.push({
+            id: dishId,
+            name: d.name,
+            hindiName: d.hindiName,
+            price: Number(d.price) || 0,
+            quantity: d.quantity || 1,
+          });
+        }
+      });
+      return updated;
+    });
+    setToastMessage(`Added ${dishes.length} items to order`);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 2500);
+  };
+
   const openCart = (type?: OrderType) => {
     if (type) setOrderType(type);
     setIsCartOpen(true);
@@ -361,6 +372,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         updateQuantity,
         removeItem,
         clearCart,
+        addMultipleItems,
         isCartOpen,
         orderType,
         setOrderType,

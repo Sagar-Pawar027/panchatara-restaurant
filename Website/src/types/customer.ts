@@ -66,4 +66,8 @@ export interface FoodOrder {
   time?: string;
   guests?: number;
   seatingArea?: string;
+  // Ratings and feedback for past orders
+  rating?: number;
+  feedback?: string;
+  ratedAt?: string;
 }

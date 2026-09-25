@@ -37,6 +37,9 @@ export interface IPreOrder extends Document {
   paymentMethod?: 'upi' | 'card' | 'cod' | 'counter' | 'whatsapp';
   paymentStatus?: 'pending' | 'paid' | 'advance_paid';
   status: 'received' | 'confirmed' | 'preparing' | 'ready' | 'out_for_delivery' | 'served' | 'delivered' | 'cancelled';
+  rating?: number;
+  feedback?: string;
+  ratedAt?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -104,6 +107,9 @@ const PreOrderSchema: Schema = new Schema(
       ],
       default: 'received',
     },
+    rating: { type: Number, min: 1, max: 5 },
+    feedback: { type: String, trim: true },
+    ratedAt: { type: String },
   },
   { timestamps: true }
 );

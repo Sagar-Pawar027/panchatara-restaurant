@@ -131,23 +131,23 @@ export function HeroSection({
           initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.5 }}
-          className="pt-2 sm:pt-4 max-w-3xl mx-auto"
+          className="pt-2 sm:pt-4 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto w-full"
         >
-          <div className="bg-[#12110F]/85 border border-[#C5A880]/30 rounded-sm p-5 sm:p-7 backdrop-blur-md shadow-2xl relative">
+          <div className="bg-[#12110F]/90 border border-[#C5A880]/35 rounded-xl p-5 sm:p-7 md:p-9 backdrop-blur-md shadow-2xl relative">
             {/* Top Eyebrow & Prompt */}
-            <div className="text-center mb-5 sm:mb-6">
-              <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] text-[#C5A880] block font-medium mb-1">
+            <div className="text-center mb-5 sm:mb-7">
+              <span className="text-xs sm:text-sm md:text-base uppercase tracking-[0.32em] text-[#C5A880] block font-semibold mb-2">
                 {isHi ? 'आपकी शाम प्रतीक्षारत है' : 'Your Evening Awaits'}
               </span>
-              <h2 className="font-editorial-serif text-xl sm:text-2xl text-[#FAF7F2] font-light">
+              <h2 className="font-editorial-serif text-2xl sm:text-3xl md:text-4xl text-[#FAF7F2] font-normal tracking-wide">
                 {isHi ? 'आप पंचतारा का अनुभव कैसे करना चाहेंगे?' : 'How would you like to experience Panchtara?'}
               </h2>
             </div>
 
             {/* Royal Concierge Welcome Banner */}
-            <div className="flex items-center gap-3 p-3 sm:p-3.5 mb-5 rounded-lg bg-gradient-to-r from-[#241F1A]/95 via-[#1A1713]/90 to-[#141210]/80 border border-[#C5A880]/40 text-left shadow-lg">
+            <div className="flex items-center gap-3.5 sm:gap-4 p-4 sm:p-5 mb-6 sm:mb-7 rounded-xl bg-gradient-to-r from-[#241F1A]/95 via-[#1A1713]/90 to-[#141210]/80 border border-[#C5A880]/40 text-left shadow-lg">
               <div className="relative shrink-0">
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#C5A880] shadow-md bg-[#241F1A]">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-[#C5A880] shadow-md bg-[#241F1A]">
                   <img
                     src="/images/royal_concierge.jpg"
                     alt="Maharaj Raghuveer Ji"
@@ -155,18 +155,18 @@ export function HeroSection({
                     referrerPolicy="no-referrer"
                   />
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-[#12110F]" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-[#12110F]" />
               </div>
-              <div className="space-y-0.5 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-editorial-serif text-xs sm:text-sm font-semibold text-[#FAF7F2]">
+              <div className="space-y-1 min-w-0">
+                <div className="flex items-center gap-2.5 flex-wrap">
+                  <span className="font-editorial-serif text-sm sm:text-base md:text-lg font-semibold text-[#FAF7F2]">
                     {isHi ? 'महाराज रघुवीर जी की ओर से सादर प्रणाम 🙏' : 'Namaste from Maharaj Raghuveer Ji 🙏'}
                   </span>
-                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#C5A880]/20 text-[#C5A880] font-mono uppercase tracking-wider hidden sm:inline-block">
+                  <span className="text-[10px] sm:text-xs px-2.5 py-0.5 rounded bg-[#C5A880]/20 text-[#C5A880] font-mono uppercase tracking-wider font-semibold hidden sm:inline-block">
                     {isHi ? 'मुख्य आतिथ्य' : 'Head Concierge'}
                   </span>
                 </div>
-                <p className="text-[11px] text-[#FAF7F2]/80 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm md:text-base text-[#FAF7F2]/90 font-normal leading-relaxed">
                   {isHi
                     ? '"पंचतारा में आपका हार्दिक स्वागत है। क्या आप आज शाम की टेबल आरक्षित करेंगे या घर के लिए ताज़ा शाही भोजन मंगवाएंगे?"'
                     : '"Welcome to Panchtara Pure Veg. Shall I reserve a royal table for your evening, or dispatch our pure veg delicacies directly to your home?"'}
@@ -175,7 +175,7 @@ export function HeroSection({
             </div>
 
             {/* 2 Conversion Choice Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-left">
               {/* Option 1: Reserve Your Table */}
               <div
                 id="hero-card-reserve"
@@ -185,30 +185,30 @@ export function HeroSection({
                 onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onReserveTable()}
                 onMouseEnter={() => setHoveredCard('reserve')}
                 onMouseLeave={() => setHoveredCard(null)}
-                className="group relative p-5 rounded-sm bg-[#181613]/90 hover:bg-[#1E1C18] border border-white/10 hover:border-[#C5A880]/70 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                className="group relative p-5 sm:p-6 md:p-7 rounded-xl bg-[#181613]/90 hover:bg-[#201D19] border border-white/10 hover:border-[#C5A880]/80 transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-md hover:shadow-xl"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-2xl" role="img" aria-label="Dining plate">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <span className="text-3xl sm:text-4xl" role="img" aria-label="Dining plate">
                       🍽
                     </span>
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-white/50 group-hover:text-[#C5A880] transition-colors">
+                    <span className="text-xs sm:text-sm font-mono tracking-widest uppercase text-white/60 group-hover:text-[#C5A880] transition-colors font-medium">
                       {isHi ? 'चरण 1 का 1' : 'Step 1 of 1'}
                     </span>
                   </div>
 
-                  <h3 className="font-editorial-serif text-lg sm:text-xl text-[#FAF7F2] group-hover:text-[#C5A880] transition-colors font-medium">
+                  <h3 className="font-editorial-serif text-xl sm:text-2xl md:text-3xl text-[#FAF7F2] group-hover:text-[#C5A880] transition-colors font-medium">
                     {isHi ? 'टेबल बुक करें' : 'Reserve Your Table'}
                   </h3>
 
-                  <p className="text-xs text-[#FAF7F2]/75 font-light leading-relaxed mt-1.5">
+                  <p className="text-xs sm:text-sm md:text-base text-[#FAF7F2]/80 font-light leading-relaxed mt-2.5">
                     {isHi ? 'अपनी यात्रा के लिए टेबल बुक करें। तारीख, समय और अतिथि चुनें।' : 'Book a table for your visit. Choose your date, time and guests.'}
                   </p>
                 </div>
 
-                <div className="pt-4 flex items-center justify-between text-xs font-medium text-[#C5A880] border-t border-white/5 mt-4">
+                <div className="pt-4 sm:pt-5 flex items-center justify-between text-xs sm:text-sm md:text-base font-semibold text-[#C5A880] border-t border-white/10 mt-5">
                   <span className="uppercase tracking-wider">{t('hero.reserve')}</span>
-                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" />
                 </div>
               </div>
 
@@ -221,36 +221,36 @@ export function HeroSection({
                 onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onPreOrderMeal()}
                 onMouseEnter={() => setHoveredCard('preorder')}
                 onMouseLeave={() => setHoveredCard(null)}
-                className="group relative p-5 rounded-sm bg-[#181613]/90 hover:bg-[#1E1C18] border border-[#C5A880]/30 hover:border-[#C5A880] transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-sm"
+                className="group relative p-5 sm:p-6 md:p-7 rounded-xl bg-[#181613]/90 hover:bg-[#201D19] border border-[#C5A880]/35 hover:border-[#C5A880] transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-md hover:shadow-xl"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-2xl" role="img" aria-label="Sparkles">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <span className="text-3xl sm:text-4xl" role="img" aria-label="Sparkles">
                       ✨
                     </span>
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-400 font-medium">
+                    <span className="text-xs sm:text-sm font-mono tracking-widest uppercase text-emerald-400 font-semibold">
                       {isHi ? '50% अग्रिम लॉक' : '50% Advance Lock'}
                     </span>
                   </div>
 
-                  <h3 className="font-editorial-serif text-lg sm:text-xl text-[#FAF7F2] group-hover:text-[#C5A880] transition-colors font-medium">
+                  <h3 className="font-editorial-serif text-xl sm:text-2xl md:text-3xl text-[#FAF7F2] group-hover:text-[#C5A880] transition-colors font-medium">
                     {isHi ? 'भोजन प्री-ऑर्डर करें' : 'Pre-Order Your Meal'}
                   </h3>
 
-                  <p className="text-xs text-[#FAF7F2]/75 font-light leading-relaxed mt-1.5">
+                  <p className="text-xs sm:text-sm md:text-base text-[#FAF7F2]/80 font-light leading-relaxed mt-2.5">
                     {isHi ? '50% अग्रिम दें और हम आपके आगमन पर गर्मागर्म भोजन तैयार रखेंगे।' : "Pay 50% now & we'll prepare your meal. Choose your dishes in advance."}
                   </p>
                 </div>
 
-                <div className="pt-4 flex items-center justify-between text-xs font-medium text-[#C5A880] border-t border-white/5 mt-4">
+                <div className="pt-4 sm:pt-5 flex items-center justify-between text-xs sm:text-sm md:text-base font-semibold text-[#C5A880] border-t border-white/10 mt-5">
                   <span className="uppercase tracking-wider">{isHi ? 'प्री-ऑर्डर शुरू करें' : 'Start Your Pre-Order'}</span>
-                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" />
                 </div>
               </div>
             </div>
 
             {/* Smart Availability Message (Section 42) */}
-            <div className="mt-4 pt-3 border-t border-white/10 text-center text-[11px] text-[#FAF7F2]/65 font-light">
+            <div className="mt-5 sm:mt-6 pt-4 border-t border-white/15 text-center text-xs sm:text-sm md:text-base text-[#FAF7F2]/80 font-light">
               <span className="text-emerald-400 font-medium">{isHi ? 'प्रतिदिन खुला:' : 'Open Daily:'}</span> {isHi ? 'दोपहर 11:00 AM – 3:30 PM • रात्रि 6:30 PM – मध्यरात्रि • अपनी यात्रा की योजना बनाएं' : 'Lunch 11:00 AM – 3:30 PM • Dinner 6:30 PM – Midnight • Plan your visit'}
             </div>
           </div>

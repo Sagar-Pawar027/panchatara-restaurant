@@ -209,3 +209,45 @@ preOrderRouter.patch('/:id/status', async (req: Request, res: Response) => {
     return res.status(500).json({ success: false, error: (error as Error).message });
   }
 });
+
+// PATCH /:id/review - submit star rating and culinary feedback
+preOrderRouter.patch('/:id/review', async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { rating, feedback } = req.body;
+
+    const numRating = Number(rating);
+    if (!numRating || numRating < 1 || numRating > 5) {
+      return res.status(400).json({ success: false, error: 'Rating must be a number between 1 and 5' });
+    }
+
+    const ratedAt = new Date().toISOString();
+    const updateFields = {
+      rating: numRating,
+      feedback: typeof feedback === 'string' ? feedback.trim() : '',
+      ratedAt,
+    };
+
+    if (isMongoDBConnected()) {
+      let updated = await (PreOrderModel as any).findByIdAndUpdate(id, updateFields, { new: true });
+      if (!updated) {
+        updated = await (PreOrderModel as any).findOneAndUpdate({ orderNumber: id }, updateFields, { new: true });
+      }
+      if (!updated) return res.status(404).json({ success: false, error: 'Order not found' });
+      return res.json({ success: true, data: updated });
+    }
+
+    const order = memoryStore.preOrders.find((o: any) => o._id === id || o.orderNumber === id);
+    if (!order) return res.status(404).json({ success: false, error: 'Order not found' });
+
+    (order as any).rating = numRating;
+    (order as any).feedback = typeof feedback === 'string' ? feedback.trim() : '';
+    (order as any).ratedAt = ratedAt;
+    (order as any).updatedAt = ratedAt;
+
+    return res.json({ success: true, data: order });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: (error as Error).message });
+  }
+});
+

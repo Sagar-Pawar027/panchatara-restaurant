@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import { Menu, X, ArrowUpRight, Phone, Utensils, ShieldCheck, Globe, User as UserIcon, ShoppingBag, Bike, Percent, MessageCircle } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Phone, Utensils, ShieldCheck, Globe, User as UserIcon, ShoppingBag, Bike, Percent, MessageCircle, History } from 'lucide-react';
 import { RESTAURANT_INFO } from '../../data/restaurant.ts';
 import { useLanguage } from '../../context/LanguageContext.tsx';
 import { useCustomerAuth } from '../../context/CustomerAuthContext.tsx';
@@ -131,16 +131,17 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
 
           {/* Right Action Bar */}
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-            {/* My Orders / Live Tracking CTA (Desktop & Tablet) */}
+            {/* Order History & Live Tracking CTA */}
             {onOpenOrders && (
               <button
                 id="header-track-orders-btn"
+                type="button"
                 onClick={onOpenOrders}
-                className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded border border-white/20 hover:border-[#C5A880]/60 bg-white/5 hover:bg-white/10 text-[11px] sm:text-xs font-medium text-[#FAF7F2] transition-colors shrink-0"
-                title={language === 'hi' ? 'मेरे ऑर्डर्स व लाइव ट्रैकिंग' : 'My Orders & Live Tracking'}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded border border-white/20 hover:border-[#C5A880]/60 bg-white/5 hover:bg-white/10 text-[11px] sm:text-xs font-medium text-[#FAF7F2] transition-colors shrink-0"
+                title={language === 'hi' ? 'ऑर्डर इतिहास एवं लाइव ट्रैकिंग' : 'Order History & Live Status'}
               >
-                <ShoppingBag className="w-3.5 h-3.5 text-[#C5A880]" />
-                <span className="hidden lg:inline">{language === 'hi' ? 'ऑर्डर्स' : 'Orders'}</span>
+                <History className="w-3.5 h-3.5 text-[#C5A880]" />
+                <span className="hidden sm:inline">{language === 'hi' ? 'ऑर्डर इतिहास' : 'Order History'}</span>
               </button>
             )}
 
@@ -340,18 +341,19 @@ export function Navbar({ onPreOrderClick, onOpenOrders }: NavbarProps) {
                 )}
               </button>
 
-              {/* My Orders Button on Mobile */}
+              {/* Order History Button on Mobile */}
               {onOpenOrders && (
                 <button
                   id="mobile-menu-orders-action"
+                  type="button"
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onOpenOrders();
                   }}
-                  className="w-full py-3 px-4 rounded bg-white/5 border border-white/10 text-white font-medium text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-3 px-4 rounded bg-white/5 border border-white/10 text-white font-medium text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 hover:border-[#C5A880]/50"
                 >
-                  <ShoppingBag className="w-4 h-4 text-[#C5A880]" />
-                  <span>{language === 'hi' ? 'मेरे ऑर्डर्स व लाइव ट्रैकिंग' : 'My Orders & Live Tracking'}</span>
+                  <History className="w-4 h-4 text-[#C5A880]" />
+                  <span>{language === 'hi' ? '📜 ऑर्डर इतिहास व लाइव स्टेटस' : '📜 Order History & Live Status'}</span>
                 </button>
               )}
 
